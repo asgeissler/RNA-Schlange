@@ -1,0 +1,20 @@
+channels:
+    - conda-forge
+    - bioconda
+    - defaults
+dependencies:
+    - r-base
+    - r-cowplot
+    - r-essentials >= 4.0
+    - r-ggrepel
+    - r-ggsci
+    - r-magick
+    - r-pheatmap
+    - r-rcolorbrewer
+    - r-tidyverse
+    - bioconductor-biostrings
+    - bioconductor-bsgenome
+    - bioconductor-deseq2
+    - bioconductor-plyranges
+    - bioconductor-rtracklayer
+

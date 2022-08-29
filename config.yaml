@@ -1,0 +1,45 @@
+
+# fastp quality filtering
+# Specify here any additional options for filtering
+# For documentation on possible options see
+# https://github.com/OpenGene/fastp
+fastp_args: [
+  '--average_qual=20',
+  '--qualified_quality_phred=20',
+  '--unqualified_percent_limit=10',
+  '--length_required=40',
+  '--adapter_sequence=AGATCGGAAGAGCACACGTCTGAACTCCAGTCA',
+  '--adapter_sequence_r2=AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT'
+]
+# a bug in the current version does not correctly report the adapter
+# occurrences...
+#'--adapter_fasta=adapter_list.fa'
+
+
+# sortmerna ribosomal RNA removal
+# specify here the database to use. The tool has representative 
+# databases already includes, see
+# https://github.com/biocore/sortmerna/wiki/User-manual-v4.0
+sortmerna: [
+  'silva-bac-16s-id90',
+  'silva-arc-16s-id95',
+  'silva-euk-18s-id95',
+  'silva-bac-23s-id98',
+  'silva-arc-23s-id98',
+  'silva-euk-28s-id98'
+]
+# this pipeline downloads these databases from
+# https://github.com/biocore/sortmerna/raw/master/data/rRNA_databases/{name}.fasta
+
+
+# Configuration of the putative diff. expression analysis
+# and associated dimensions of plots.
+dge: {
+  # conduct putative analysis to significant level
+  alpha: 0.05,
+  # The dimensions of the plots is given as a string of the format
+  # '<width>x<height>'
+  dim_pca: '12x8',
+  dim_scatter: '20x15',
+  dim_biotype: '8x6'
+}

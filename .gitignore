@@ -1,0 +1,6 @@
+# dont's store binary data
+.snakemake
+analysis
+data
+genome.fna.gz
+genome.gff.gz
