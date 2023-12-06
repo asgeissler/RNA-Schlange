@@ -128,13 +128,13 @@ If the data that will be downloaded is single-end, please
 name the file `sra-SE.csv`.
 For paired-end data name the file `sra-PE.csv.
 
-A hypothetical `sra\*.csv` should look like:
+A hypothetical `sra\*.csv` should look like (subset of the (airway)[https://bioconductor.org/packages/release/data/experiment/vignettes/airway/inst/doc/airway.html] dataset):
 
         run,condition
-        SRR12345,control
-        SRR12345,control
-        SRR12345,case
-        SRR12345,case
+        SRR1039508,N61311-control
+        SRR1039509,N61311-case
+        SRR1039512,N052611-control
+        SRR1039513,N052611-case
 
 
 ## Pipeline execution
