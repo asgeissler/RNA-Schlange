@@ -121,14 +121,14 @@ For paired-end reads, the values for the pairs are either R1 or R2.
 
 RNA-Schlange supports you to specify 
 run accession numbers to download from the
-(SRA)[https://www.ncbi.nlm.nih.gov/sra] database.
+[SRA](https://www.ncbi.nlm.nih.gov/sra) database.
 All you needed to specify is a comma separated file
 specifying the 'run' and 'condition'.
 If the data that will be downloaded is single-end, please
 name the file `sra-SE.csv`.
 For paired-end data name the file `sra-PE.csv.
 
-A hypothetical `sra\*.csv` should look like (subset of the (airway)[https://bioconductor.org/packages/release/data/experiment/vignettes/airway/inst/doc/airway.html] dataset):
+A hypothetical `sra\*.csv` should look like, example from the [airway](https://bioconductor.org/packages/release/data/experiment/vignettes/airway/inst/doc/airway.html) dataset:
 
         run,condition
         SRR1039508,N61311-control
@@ -309,7 +309,7 @@ choosen for the removal steps.
 The removal is relative to represantative squences collected
 by **SortMeRNA**. Additional
 filter sets are listed in the
-[handbook](https://github.com/biocore/sortmerna/wiki/User-manual-v4.0].
+[handbook](https://github.com/biocore/sortmerna/wiki/User-manual-v4.0).
 
         sortmerna: [
           'silva-bac-16s-id90',
