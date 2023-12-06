@@ -347,7 +347,7 @@ When using this pipeline in it's containerized form (*e.g.*
 will be downloaded.
 
 
-        # After a complete run of the pipeline, snapshot the conda envs
+        # After a complete run of the pipeline (to make sure all works), snapshot the conda envs
         snakemake --containerize > Dockerfile
         # Convert to a singularity file
         # mambaforge does not have curl installed -> use wget
