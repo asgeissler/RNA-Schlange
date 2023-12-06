@@ -14,6 +14,9 @@ min_version('7.9.0')
 # Load configuration
 configfile: 'config.yaml'
 
+# reproducible container image for docker/singularity
+containerized: 'oras://ghcr.io/asgeissler/rnaschlange:0.1'
+
 ################################################################################
 ################################################################################
 # default state, determine in the large if-else block below

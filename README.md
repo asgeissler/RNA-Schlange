@@ -159,9 +159,15 @@ If you prefer to use singularity to handle the dependencies,
 then please use
 `bash run_slurm_singularity.sh` and the configuration
 `clusterprofile_slurm_singularity/config.yaml`.
+For this use case, the pipeline will download a pre-build 
+containerized 
+[containerized](https://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html#containerization-of-conda-based-workflows)
+image that includes all dependencies. Thanks to the ORAS standard,
+you can use this image also for a docker environment.
 
 **Recommendation:** Set the `conda-prefix` and `singularity-prefix`
-to paths on your server for centralized storage of the dependencies.
+to paths on your server for centralized storage of the dependencies and
+container images.
 Then dependencies won't be re-installed for each new workflow instance
 (saving time and storage).
 
@@ -333,3 +339,26 @@ The dimensions of the plots is given as a string of the format
           dim_scatter: '20x20',
           dim_biotype: '8x6'
         }
+
+## Developer note
+
+When using this pipeline in it's containerized form (*e.g.*
+`run_singularity.sh`), then an image that was build with the following commands
+will be downloaded.
+
+
+        # After a complete run of the pipeline, snapshot the conda envs
+        snakemake --containerize > Dockerfile
+        # Convert to a singularity file
+        # mambaforge does not have curl installed -> use wget
+        # `curl URL -o PATH` becomes `wget URL -O PATH`
+        # spython incorrectly doubles the '/environment.yaml/environment.yaml'
+        spython recipe Dockerfile                              | \
+            sed 's,curl \([^ ]*\) -o \([^ ]*\),wget \1 -O \2,' | \
+            sed 's,/environment.yaml/environment.yaml,/environment.yaml,' > Singularity
+        singularity build --fakeroot rnaschlange-0.1.sif Singularity
+        # setup repositry credential
+        singularity remote login --username <USER> oras://ghcr.io
+        # + enter secret access token
+        # upload image
+        singularity push rnaschlange-0.1.sif oras://ghcr.io/asgeissler/rnaschlange:0.1
