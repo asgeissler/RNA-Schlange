@@ -24,3 +24,4 @@ printshellcmds: True
 scheduler: greedy
 use-conda: True
 conda-frontend: mamba
+#conda-prefix: /home/local/src/conda/snakemake-wrappers

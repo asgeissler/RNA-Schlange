@@ -43,7 +43,10 @@ RNA-Schlange uses the following tools:
 
         $ git clone asgeissler/RNA-Schlange
     
-All remaining dependencies will be handled by Snakemake.
+When using the `run.sh` helper script,
+Snakemake will automatically install
+the remaining dependencies (*e.g.* fastp)
+by creating new conda environments within the workflow directory.
 
 
 ## User guide
@@ -134,7 +137,7 @@ A hypothetical `sra\*.csv` should look like:
         SRR12345,case
 
 
-### Running the pipeline
+## Pipeline execution
 
 All that is needed to start the pipeline is to execute the helper script with:
 
@@ -142,15 +145,35 @@ All that is needed to start the pipeline is to execute the helper script with:
 
 If you specified the data via SRA entries, you would need to run the script
 twice (once for the download and once for the quality assessment).
+In the helper script, Snakemake is set to automatically install the software
+dependencies with conda.
+
+### Cluster execution and singularity
 
 Alternatively, if you prefer the computations to run in a cluster,
 RNA-Schlange comes with support for *slurm*.
 Simply use `bash run_slurm.sh` after adapting the configurations to you
-system in `slurmprofile/config.yaml`.
+system in `clusterprofile_slurm/config.yaml`.
+
+If you prefer to use singularity to handle the dependencies,
+then please use
+`bash run_slurm_singularity.sh` and the configuration
+`clusterprofile_slurm_singularity/config.yaml`.
+
+**Recommendation:** Set the `conda-prefix` and `singularity-prefix`
+to paths on your server for centralized storage of the dependencies.
+Then dependencies won't be re-installed for each new workflow instance
+(saving time and storage).
+
+**Note on SRA downloading:** Due this pipelines internal coding to conditionally
+handle user provided or SRA deposited RNA-seq data, it is not possible to
+split the downloading part into multiple jobs. Uset the
+`run.sh` or `run_singularity.sh` helpers for the downloading part
+(can be submitted to a queue as a single job).
 
 
 
-### Analysis output
+## Pipeline analysis output
 
 All computatioal results of the pipeline are stored in the `analysis`
 directory.
@@ -227,7 +250,7 @@ prefixes per folder:
   and expression levels quantification.
 
 
-### Optional configurations
+## Optional configurations
 
 RNA-Schlange attempts to provide a near configuration-free 
 experience of assessing the overall RNA-seq data quality.
@@ -237,7 +260,7 @@ the
 [YAML format](https://en.wikipedia.org/wiki/YAML#Basic_components).
 
 
-#### fastp quality filtering
+### fastp quality filtering
 
 The default paramters are set to
 
@@ -273,7 +296,7 @@ for explicitly checking for potential contamination by these sequences.
 Alterantive adapter sequences are listed `adapter_list.fa`.
 
 
-#### SortMeRNA ribosomal RNA removal
+### SortMeRNA ribosomal RNA removal
 
 Per default, the 16S, 18S, and 23S ribosomal RNAs are
 choosen for the removal steps.
@@ -291,7 +314,8 @@ filter sets are listed in the
           'silva-euk-28s-id98'
         ]
 
-#### DESeq2 analysis
+
+### DESeq2 analysis
 
 The assessment of putative 
 differential gene expression is per default relative to the
