@@ -1,0 +1,31 @@
+INFO. samples.csv written to prevent re-download, but you might want
+to remove it again if the download failed due to
+e.g. network problems.
+
+Also, since SRA does not provide an easy way of assessing the batch
+each file was in, the are all set to 'batch1'.
+FROM condaforge/mambaforge:latest
+LABEL io.github.snakemake.containerized="true"
+LABEL io.github.snakemake.conda_env_hash="924050f38c9ab468569ea039a48e3781db685f967309836ce63368520e333382"
+
+# Step 1: Retrieve conda environments
+
+# Conda environment:
+#   source: https://github.com/snakemake/snakemake-wrappers/raw/v1.10.0/bio/sra-tools/fasterq-dump/environment.yaml
+#   prefix: /conda-envs/85633ff8bea713d372cb9152f291c3a8
+#   channels:
+#     - conda-forge
+#     - bioconda
+#     - nodefaults
+#   dependencies:
+#     - sra-tools >2.9.1
+#     - pigz >=2.6
+#     - pbzip2 >=1.1
+#     - snakemake-wrapper-utils =0.3
+RUN mkdir -p /conda-envs/85633ff8bea713d372cb9152f291c3a8
+ADD https://github.com/snakemake/snakemake-wrappers/raw/v1.10.0/bio/sra-tools/fasterq-dump/environment.yaml /conda-envs/85633ff8bea713d372cb9152f291c3a8/environment.yaml
+
+# Step 2: Generate conda environments
+
+RUN mamba env create --prefix /conda-envs/85633ff8bea713d372cb9152f291c3a8 --file /conda-envs/85633ff8bea713d372cb9152f291c3a8/environment.yaml && \
+    mamba clean --all -y

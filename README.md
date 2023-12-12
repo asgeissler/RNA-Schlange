@@ -347,8 +347,12 @@ When using this pipeline in it's containerized form (*e.g.*
 will be downloaded.
 
 
+        # The rule for fasterq-dump download from SRA is only contitionally
+        # loaded, therefore there is a separate Dockerfile just for this part.
+        snakemake --containerize > Dockerfile.fasterq
         # After a complete run of the pipeline (to make sure all works), snapshot the conda envs
         snakemake --containerize > Dockerfile
+        # MANUALLY copy paste and adapt step1/2 part from Dockerfile.fasterq over
         # Convert to a singularity file
         # mambaforge does not have curl installed -> use wget
         # `curl URL -o PATH` becomes `wget URL -O PATH`

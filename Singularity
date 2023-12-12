@@ -13,6 +13,21 @@ io.github.snakemake.conda_env_hash="a7fe2a16e9866840f4ea59de785ed1e458e3a64ef378
 # Step 1: Retrieve conda environments
 
 # Conda environment:
+#   source: https://github.com/snakemake/snakemake-wrappers/raw/v1.10.0/bio/sra-tools/fasterq-dump/environment.yaml
+#   prefix: /conda-envs/85633ff8bea713d372cb9152f291c3a8
+#   channels:
+#     - conda-forge
+#     - bioconda
+#     - nodefaults
+#   dependencies:
+#     - sra-tools >2.9.1
+#     - pigz >=2.6
+#     - pbzip2 >=1.1
+#     - snakemake-wrapper-utils =0.3
+mkdir -p /conda-envs/85633ff8bea713d372cb9152f291c3a8
+wget https://github.com/snakemake/snakemake-wrappers/raw/v1.10.0/bio/sra-tools/fasterq-dump/environment.yaml -O /conda-envs/85633ff8bea713d372cb9152f291c3a8/environment.yaml
+
+# Conda environment:
 #   source: envs/r.yaml
 #   prefix: /conda-envs/81349e987b92efdd9c42d5622123e303
 #   channels:
@@ -117,7 +132,9 @@ mamba env create --prefix /conda-envs/573927d1a2f1de4bfdd03a5385f50ed8 --file /c
 mamba env create --prefix /conda-envs/fd1008dfa88a4500724e3596f62f8bff --file /conda-envs/fd1008dfa88a4500724e3596f62f8bff/environment.yaml && \
 mamba env create --prefix /conda-envs/e5f19ce92781182c0a011e25d50bd1c9 --file /conda-envs/e5f19ce92781182c0a011e25d50bd1c9/environment.yaml && \
 mamba env create --prefix /conda-envs/f1527a5e21168384a2a6f09fa6ab5f10 --file /conda-envs/f1527a5e21168384a2a6f09fa6ab5f10/environment.yaml && \
+mamba env create --prefix /conda-envs/85633ff8bea713d372cb9152f291c3a8 --file /conda-envs/85633ff8bea713d372cb9152f291c3a8/environment.yaml && \
 mamba clean --all -y
+
 %runscript
 exec /bin/bash "$@"
 %startscript
