@@ -158,15 +158,9 @@ def row_wise(x, df):
 tasks = list()
 
 ################################################################################
-# Potentially download data
+# Sownload data
 
 if not examples and sample_files is None:
-    if os.path.isdir('data'):
-        raise Exception(cleandoc("""
-            Please move the folder 'data', otherwise the download might
-            overwrite precious data of yours.
-            """))
-
     include: 'rules/00_sra.smk'
 
 ################################################################################
