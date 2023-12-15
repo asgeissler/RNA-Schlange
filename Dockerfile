@@ -1,6 +1,6 @@
 FROM condaforge/mambaforge:latest
 LABEL io.github.snakemake.containerized="true"
-LABEL io.github.snakemake.conda_env_hash="7834531ef9a038f4813d09f652b45c3daaa45ed98bc8568f1269f4606d755605"
+LABEL io.github.snakemake.conda_env_hash="6361a69b2f86b2a5d26ea0bfeea7b71b4228009ab7e104c5587d090032e5dd4a"
 
 # Step 1: Retrieve conda environments
 
@@ -80,32 +80,6 @@ RUN mkdir -p /conda-envs/573927d1a2f1de4bfdd03a5385f50ed8
 ADD https://github.com/snakemake/snakemake-wrappers/raw/v1.12.0/bio/fastqc/environment.yaml /conda-envs/573927d1a2f1de4bfdd03a5385f50ed8/environment.yaml
 
 # Conda environment:
-#   source: https://github.com/snakemake/snakemake-wrappers/raw/v1.12.0/bio/salmon/index/environment.yaml
-#   prefix: /conda-envs/e5f19ce92781182c0a011e25d50bd1c9
-#   channels:
-#     - conda-forge
-#     - bioconda
-#     - nodefaults
-#   dependencies:
-#     - salmon ==1.8.0
-RUN mkdir -p /conda-envs/e5f19ce92781182c0a011e25d50bd1c9
-ADD https://github.com/snakemake/snakemake-wrappers/raw/v1.12.0/bio/salmon/index/environment.yaml /conda-envs/e5f19ce92781182c0a011e25d50bd1c9/environment.yaml
-
-# Conda environment:
-#   source: https://github.com/snakemake/snakemake-wrappers/raw/v1.12.0/bio/salmon/quant/environment.yaml
-#   prefix: /conda-envs/f1527a5e21168384a2a6f09fa6ab5f10
-#   channels:
-#     - conda-forge
-#     - bioconda
-#     - nodefaults
-#   dependencies:
-#     - salmon ==1.8.0
-#     - gzip ==1.11
-#     - bzip2 ==1.0.8
-RUN mkdir -p /conda-envs/f1527a5e21168384a2a6f09fa6ab5f10
-ADD https://github.com/snakemake/snakemake-wrappers/raw/v1.12.0/bio/salmon/quant/environment.yaml /conda-envs/f1527a5e21168384a2a6f09fa6ab5f10/environment.yaml
-
-# Conda environment:
 #   source: https://github.com/snakemake/snakemake-wrappers/raw/v3.2.0/bio/multiqc/environment.yaml
 #   prefix: /conda-envs/a74c0ac65c84ed438731c3397703af31
 #   channels:
@@ -117,15 +91,41 @@ ADD https://github.com/snakemake/snakemake-wrappers/raw/v1.12.0/bio/salmon/quant
 RUN mkdir -p /conda-envs/a74c0ac65c84ed438731c3397703af31
 ADD https://github.com/snakemake/snakemake-wrappers/raw/v3.2.0/bio/multiqc/environment.yaml /conda-envs/a74c0ac65c84ed438731c3397703af31/environment.yaml
 
+# Conda environment:
+#   source: https://github.com/snakemake/snakemake-wrappers/raw/v3.2.0/bio/salmon/index/environment.yaml
+#   prefix: /conda-envs/58a327d476856b9082ebbfd2ce43537c
+#   channels:
+#     - conda-forge
+#     - bioconda
+#     - nodefaults
+#   dependencies:
+#     - salmon =1.10.2
+RUN mkdir -p /conda-envs/58a327d476856b9082ebbfd2ce43537c
+ADD https://github.com/snakemake/snakemake-wrappers/raw/v3.2.0/bio/salmon/index/environment.yaml /conda-envs/58a327d476856b9082ebbfd2ce43537c/environment.yaml
+
+# Conda environment:
+#   source: https://github.com/snakemake/snakemake-wrappers/raw/v3.2.0/bio/salmon/quant/environment.yaml
+#   prefix: /conda-envs/c9b8e6e6cf962163ad419bc658b71b79
+#   channels:
+#     - bioconda
+#     - conda-forge
+#     - nodefaults
+#   dependencies:
+#     - salmon =1.10.2
+#     - gzip =1.13
+#     - bzip2 =1.0.8
+RUN mkdir -p /conda-envs/c9b8e6e6cf962163ad419bc658b71b79
+ADD https://github.com/snakemake/snakemake-wrappers/raw/v3.2.0/bio/salmon/quant/environment.yaml /conda-envs/c9b8e6e6cf962163ad419bc658b71b79/environment.yaml
+
 # Step 2: Generate conda environments
 
 RUN mamba env create --prefix /conda-envs/81349e987b92efdd9c42d5622123e303 --file /conda-envs/81349e987b92efdd9c42d5622123e303/environment.yaml && \
     mamba env create --prefix /conda-envs/b3a58c9dd8d8c7ef4943a32053eca134 --file /conda-envs/b3a58c9dd8d8c7ef4943a32053eca134/environment.yaml && \
     mamba env create --prefix /conda-envs/ead20a3f8bbfa36fbb2e0c3f905c1787 --file /conda-envs/ead20a3f8bbfa36fbb2e0c3f905c1787/environment.yaml && \
     mamba env create --prefix /conda-envs/573927d1a2f1de4bfdd03a5385f50ed8 --file /conda-envs/573927d1a2f1de4bfdd03a5385f50ed8/environment.yaml && \
-    mamba env create --prefix /conda-envs/e5f19ce92781182c0a011e25d50bd1c9 --file /conda-envs/e5f19ce92781182c0a011e25d50bd1c9/environment.yaml && \
-    mamba env create --prefix /conda-envs/f1527a5e21168384a2a6f09fa6ab5f10 --file /conda-envs/f1527a5e21168384a2a6f09fa6ab5f10/environment.yaml && \
     mamba env create --prefix /conda-envs/a74c0ac65c84ed438731c3397703af31 --file /conda-envs/a74c0ac65c84ed438731c3397703af31/environment.yaml && \
+    mamba env create --prefix /conda-envs/58a327d476856b9082ebbfd2ce43537c --file /conda-envs/58a327d476856b9082ebbfd2ce43537c/environment.yaml && \
+    mamba env create --prefix /conda-envs/c9b8e6e6cf962163ad419bc658b71b79 --file /conda-envs/c9b8e6e6cf962163ad419bc658b71b79/environment.yaml && \
     mamba env create --prefix /conda-envs/85633ff8bea713d372cb9152f291c3a8 --file /conda-envs/85633ff8bea713d372cb9152f291c3a8/environment.yaml && \
     mamba clean --all -y
 

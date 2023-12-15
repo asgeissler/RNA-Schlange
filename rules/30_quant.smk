@@ -25,7 +25,7 @@ rule salmon_index:
     params:
         extra=" ".join(config['salmon_index_args'])
     wrapper:
-        "v1.12.0/bio/salmon/index"
+        'v3.2.0/bio/salmon/index'
 
 
 tasks.append('analysis/31_salmon_index')
@@ -59,7 +59,7 @@ rule salmon:
         'logs/salmon/{name}.log'
     threads: 4
     wrapper:
-        'v1.12.0/bio/salmon/quant'
+        'v3.2.0/bio/salmon/quant'
 
 
 # Remember to run the respective tasks
