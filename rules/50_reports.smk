@@ -19,7 +19,7 @@ rule multi_qc_before:
     log:
         'logs/multiqc/fastqc-before.log'
     wrapper:
-        'v1.12.0/bio/multiqc'
+        'v3.2.0/bio/multiqc'
 
 
 tasks.append('analysis/50_fastqc_before/multiqc.html')
@@ -34,7 +34,7 @@ rule multi_qc_after:
     log:
         'logs/multiqc/fastqc-before.log'
     wrapper:
-        'v1.12.0/bio/multiqc'
+        'v3.2.0/bio/multiqc'
 
 
 tasks.append('analysis/51_fastqc_after/multiqc.html')
@@ -64,7 +64,7 @@ rule multi_main:
     log:
         "logs/multiqc/fastqc-before.log"
     wrapper:
-        "v1.12.0/bio/multiqc"
+        'v3.2.0/bio/multiqc'
 
 
 
