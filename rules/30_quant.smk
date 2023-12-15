@@ -20,6 +20,10 @@ rule salmon_index:
     log:
         'logs/salmon/index.txt'
     threads: 4
+    resources:
+        mem_mb = '20GB'
+    params:
+        extra=" ".join(config['salmon_index_args'])
     wrapper:
         "v1.12.0/bio/salmon/index"
 

@@ -16,6 +16,12 @@ fastp_args: [
 #'--adapter_fasta=adapter_list.fa'
 
 
+salmon_index_args: [
+  # set this if you use the gencode provided transcript sequences
+  #'--gencode'
+]
+
+
 # sortmerna ribosomal RNA removal
 # specify here the database to use. The tool has representative 
 # databases already includes, see

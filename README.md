@@ -265,6 +265,21 @@ However, a user could still adapt pipeline in the
 the 
 [YAML format](https://en.wikipedia.org/wiki/YAML#Basic_components).
 
+### Provided transcript/gene sequences and Gencode
+
+Instead of having the pipeline extract the sequences for the genes annotatated
+in the `genome.gff.gz`, you can provide already given gene/transcript sequences
+For example, you can use the transcript sequences for mouse or human
+from the [GENCODE project](https://www.gencodegenes.org/):
+
+        wget $URL -O analysis/30_genes.fna.gz
+
+In case of GENCODE provided sequences, please adapt the `config.yaml`:
+
+        salmon_index_args: [
+          '--gencode'
+        ]
+
 
 ### fastp quality filtering
 
