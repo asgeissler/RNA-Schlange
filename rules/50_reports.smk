@@ -15,7 +15,8 @@ rule multi_qc_before:
     input:
         row_wise(in_before, sample_files)
     output:
-        'analysis/50_fastqc_before/multiqc.html'
+        'analysis/50_fastqc_before/multiqc.html',
+        directory("analysis/50_fastqc_before/multiqc_data")
     log:
         'logs/multiqc/fastqc-before.log'
     wrapper:
@@ -30,7 +31,8 @@ rule multi_qc_after:
     input:
         row_wise(in_after, sample_files)
     output:
-        'analysis/51_fastqc_after/multiqc.html'
+        'analysis/51_fastqc_after/multiqc.html',
+        directory("analysis/51_fastqc_after/multiqc_data")
     log:
         'logs/multiqc/fastqc-before.log'
     wrapper:
@@ -60,7 +62,8 @@ rule multi_main:
             sample_files
         )
     output:
-        "analysis/53_main_multiqc/multiqc.html"
+        "analysis/53_main_multiqc/multiqc.html",
+        directory("analysis/53_main_multiqc/multiqc_data")
     log:
         "logs/multiqc/fastqc-before.log"
     wrapper:
