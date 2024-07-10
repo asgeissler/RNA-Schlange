@@ -10,8 +10,8 @@ as well ass both **single-end** and **paired-end** sequencing data.
 Alternatively, a user can specify a set of SRA runs that should be downloaded.
 If you use the *RNA-Schlange*, please consider citing:
 
-"Genome-scale prediction of stable housekeeping genes in Synechococcus sp. PCC 7002".  
-Adrian Sven Geissler, Elena Carrasquer Alvarez, Christian Anthon, Niels-Ulrik Frigaard, Jan Gorodkin, Stefan Ernst Seemann. 
+"Exploring the RNA structure regulatory potential in 202 cyanobacterial genomes"  
+AS  Geissler, EC Alvarez, C Anthon, NU Frigaard, J Gorodkin, and SE Seemann  
 *in preparation*
 
 
